@@ -1,11 +1,24 @@
 /* eslint-disable @typescript-eslint/no-require-imports */
 import type { Config } from "tailwindcss";
+import fluid, {
+  extract,
+  screens,
+  fontSize,
+  FluidThemeConfig,
+} from "fluid-tailwind";
 
-const config: Config = {
+export default {
   darkMode: ["class"],
-  content: ["./src/**/*.{js,ts,jsx,tsx,mdx}"],
+  content: { files: ["./src/**/*.{js,ts,jsx,tsx,mdx}"], extract },
   theme: {
+    /** @type {import('fluid-tailwind').FluidThemeConfig} */
+    fluid: (({ theme }) => ({
+      defaultScreens: ["20rem", theme("screens.lg")],
+    })) satisfies FluidThemeConfig,
     extend: {
+      screens,
+      fontSize,
+
       colors: {
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
@@ -55,6 +68,5 @@ const config: Config = {
       },
     },
   },
-  plugins: [require("tailwindcss-animate")],
-};
-export default config;
+  plugins: [require("tailwindcss-animate"), fluid],
+} satisfies Config;
