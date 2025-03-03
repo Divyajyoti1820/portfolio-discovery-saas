@@ -2,6 +2,8 @@ import { auth } from "@/lib/auth";
 import { Hono } from "hono";
 import { handle } from "hono/vercel";
 
+import platform from "@/features/platform/server";
+
 export const runtime = "nodejs";
 
 const app = new Hono<{
@@ -29,9 +31,12 @@ app.on(["POST", "GET"], "/api/auth/*", (c) => {
   return auth.handler(c.req.raw);
 });
 
-// const route =
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+const route = app.route("/platform", platform);
 
 export const GET = handle(app);
 export const POST = handle(app);
 export const DELETE = handle(app);
 export const PATCH = handle(app);
+
+export type AppType = typeof app;
