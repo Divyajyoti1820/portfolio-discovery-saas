@@ -1,13 +1,18 @@
+"use client";
+
 import Image from "next/image";
+import { usePathname } from "next/navigation";
+import { useRouter } from "next/navigation";
 
 import { FaEye } from "react-icons/fa";
 import { LinkIcon, LogOutIcon, UserIcon } from "lucide-react";
 
-import { Button } from "@/components/ui/button";
-
 export const Navigation = () => {
+  const pathname = usePathname();
+  const router = useRouter();
+
   return (
-    <nav className="h-full p-4 bg-white flex flex-row items-center justify-between rounded-xl">
+    <nav className="h-full p-4 bg-white flex flex-row items-center justify-between rounded-lg">
       <div className="w-auto h-full flex items-center justify-center">
         <Image
           src="/logo.svg"
@@ -30,25 +35,31 @@ export const Navigation = () => {
           className="flex flex-row gap-x-2 px-3 py-2 md:px-[1.687rem] md:py-[0.6875rem] hover:bg-primary/20 hover:text-primary rounded-lg transition-all"
         >
           <LinkIcon className="size-5" />
-          <p className="font-bold hidden md:block">Links</p>
+          <p className="font-bold hidden lg:block">Links</p>
         </button>
         <button
           type="button"
           className="flex flex-row gap-x-2 px-3 py-2  md:px-[1.6875rem] md:py-[0.6875rem] hover:bg-primary/20 hover:text-primary rounded-lg transition-all ease-in"
         >
           <UserIcon className="size-5" />
-          <p className="font-bold hidden md:block">Profile Details</p>
+          <p className="font-bold hidden lg:block">Profile Details</p>
         </button>
       </div>
       <div className="flex flex-row items-center gap-x-4">
-        <Button type="button" variant="secondary" className="px- py-2">
+        <button
+          type="button"
+          className="flex flex-row items-center justify-center gap-x-2 px-3 py-2 border-2 border-primary text-primary  md:px-[1.6875rem] md:py-[0.6875rem] hover:bg-primary hover:text-primary-foreground rounded-lg transition-all ease-in"
+        >
           <FaEye className="size-5" />
-          <p className="text-semibold hidden md:block">Preview</p>
-        </Button>
-        <Button type="button" variant="destructive" className="px-4 py-2">
+          <p className="text-semibold hidden lg:block">Preview</p>
+        </button>
+        <button
+          type="button"
+          className="flex flex-row items-center justify-center gap-x-2 px-3 py-2 bg-destructive text-destructive-foreground md:px-[1.6875rem] md:py-[0.6875rem] hover:bg-destructive/50 hover:text-white rounded-lg transition-all ease-in"
+        >
           <LogOutIcon className="size-5" />
-          <p className="text-bold hidden md:block">Logout</p>
-        </Button>
+          <p className="text-bold hidden lg:block">Logout</p>
+        </button>
       </div>
     </nav>
   );
