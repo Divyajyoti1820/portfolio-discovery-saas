@@ -160,7 +160,9 @@ export const LoginCard = () => {
         <p className="text-sm text-muted-foreground">
           Don&apos;t have an account?
           <span
-            onClick={() => router.push("/login")}
+            onClick={() => {
+              router.push("/register");
+            }}
             className="ml-1 cursor-pointer text-blue-600 hover:underline"
           >
             Create account

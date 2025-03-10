@@ -3,6 +3,7 @@ import { Hono } from "hono";
 import { handle } from "hono/vercel";
 
 import platform from "@/features/platform/server";
+import profile from "@/features/profile/server";
 
 export const runtime = "nodejs";
 
@@ -32,11 +33,11 @@ app.on(["POST", "GET"], "/api/auth/*", (c) => {
 });
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-const route = app.route("/platform", platform);
+const route = app.route("/platform", platform).route("/profile", profile);
 
 export const GET = handle(app);
 export const POST = handle(app);
 export const DELETE = handle(app);
 export const PATCH = handle(app);
 
-export type AppType = typeof app;
+export type AppType = typeof route;

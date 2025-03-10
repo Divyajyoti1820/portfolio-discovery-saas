@@ -35,6 +35,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
+import { useCreateProfile } from "@/features/profile/api/use-create-profile";
 
 export const RegisterCard = () => {
   const router = useRouter();
@@ -54,9 +55,12 @@ export const RegisterCard = () => {
     },
   });
 
-  const [pending, setPending] = useState(false);
+  const [registerPending, setRegisterPending] = useState(false);
+  // const { mutate: createProfile, isPending: createProfilePending } =
+  //   useCreateProfile();
+  const isPending = registerPending;
   const onSubmitHandler = async (values: z.infer<typeof RegisterSchema>) => {
-    setPending(true);
+    setRegisterPending(true);
 
     await signUp
       .email({
@@ -65,15 +69,15 @@ export const RegisterCard = () => {
         name: values.name,
         callbackURL: "/",
       })
-      .then(({ data }) => {
-        toast.success(`${data?.user.name} successfully registered!`);
+      .then(() => {
+        toast.success("Account created successfully!");
         router.push("/");
       })
       .catch((error) => {
         toast.error(error.message);
       })
       .finally(() => {
-        setPending(false);
+        setRegisterPending(false);
       });
   };
 
@@ -98,7 +102,7 @@ export const RegisterCard = () => {
           >
             <FormField
               name="name"
-              disabled={pending}
+              disabled={isPending}
               control={form.control}
               render={({ field }) => (
                 <FormItem>
@@ -120,7 +124,7 @@ export const RegisterCard = () => {
             />
             <FormField
               name="email"
-              disabled={pending}
+              disabled={isPending}
               control={form.control}
               render={({ field }) => (
                 <FormItem>
@@ -142,7 +146,7 @@ export const RegisterCard = () => {
             />
             <FormField
               name="password"
-              disabled={pending}
+              disabled={isPending}
               control={form.control}
               render={({ field }) => (
                 <FormItem className="w-full">
@@ -162,7 +166,7 @@ export const RegisterCard = () => {
                     </div>
                     <Button
                       type="button"
-                      disabled={pending}
+                      disabled={isPending}
                       variant="ghost"
                       size="icon"
                       onClick={visiblePassword}
@@ -179,7 +183,7 @@ export const RegisterCard = () => {
             />
             <FormField
               name="confirmPassword"
-              disabled={pending}
+              disabled={isPending}
               control={form.control}
               render={({ field }) => (
                 <FormItem className="w-full">
@@ -199,7 +203,7 @@ export const RegisterCard = () => {
                     </div>
                     <Button
                       type="button"
-                      disabled={pending}
+                      disabled={isPending}
                       variant="ghost"
                       size="icon"
                       onClick={visiblePassword}
@@ -214,7 +218,7 @@ export const RegisterCard = () => {
                 </FormItem>
               )}
             />
-            <Button disabled={pending} type="submit" size="lg">
+            <Button disabled={isPending} type="submit" size="lg">
               Create new account
             </Button>
           </form>

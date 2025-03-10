@@ -3,6 +3,7 @@ import { Instrument_Sans } from "next/font/google";
 import "./globals.css";
 
 import { Toaster } from "sonner";
+import { QueryProvider } from "@/components/provider/query-provider";
 
 const font = Instrument_Sans({
   subsets: ["latin"],
@@ -23,8 +24,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${font.className} antialiased`}>
-        <Toaster />
-        {children}
+        <QueryProvider>
+          <Toaster />
+          {children}
+        </QueryProvider>
       </body>
     </html>
   );

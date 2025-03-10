@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 
 import { FaEye } from "react-icons/fa";
 import { LinkIcon, LogOutIcon, UserIcon } from "lucide-react";
+import { cn } from "@/lib/utils";
 
 export const Navigation = () => {
   const pathname = usePathname();
@@ -32,14 +33,22 @@ export const Navigation = () => {
       <div className="w-auto h-full flex flex-row items-center gap-x-4 text-muted">
         <button
           type="button"
-          className="flex flex-row gap-x-2 px-3 py-2 md:px-[1.687rem] md:py-[0.6875rem] hover:bg-primary/20 hover:text-primary rounded-lg transition-all"
+          onClick={() => router.push("/")}
+          className={cn(
+            "flex flex-row gap-x-2 px-3 py-2 md:px-[1.687rem] md:py-[0.6875rem] border-2 border-transparent hover:border-primary hover:text-primary rounded-lg transition-all",
+            pathname === "/" && "bg-primary/20 text-primary"
+          )}
         >
           <LinkIcon className="size-5" />
           <p className="font-bold hidden lg:block">Links</p>
         </button>
         <button
           type="button"
-          className="flex flex-row gap-x-2 px-3 py-2  md:px-[1.6875rem] md:py-[0.6875rem] hover:bg-primary/20 hover:text-primary rounded-lg transition-all ease-in"
+          onClick={() => router.push("/profile")}
+          className={cn(
+            "flex flex-row gap-x-2 px-3 py-2  md:px-[1.6875rem] md:py-[0.6875rem] hover:bg-primary/20 hover:text-primary rounded-lg transition-all ease-in",
+            pathname === "/profile" && "bg-primary/20 text-primary"
+          )}
         >
           <UserIcon className="size-5" />
           <p className="font-bold hidden lg:block">Profile Details</p>

@@ -2,7 +2,7 @@ import Image from "next/image";
 
 export const Empty = () => {
   return (
-    <div className="w-full h-[calc(100vh-22rem)] sm:h-[calc(100vh-25rem)] xl:h-[36.25rem] flex flex-col gap-y-10 items-center justify-center bg-blue-400 p-2 lg:p-5 rounded-lg">
+    <div className="w-full h-[calc(100vh-22rem)] sm:h-[calc(100vh-25rem)] xl:h-[36.25rem] flex flex-col gap-y-10 items-center justify-center bg-background p-2 lg:p-5 rounded-lg">
       <div>
         <Image
           src="/empty.svg"
