@@ -3,17 +3,19 @@ import { useMutation } from "@tanstack/react-query";
 import { InferRequestType, InferResponseType } from "hono";
 
 type RequestType = InferRequestType<
-  (typeof client.api.profile.create)["$post"]
+  (typeof client.api.authentication.profile.update)["$patch"]
 >;
 type ResponseType = InferResponseType<
-  (typeof client.api.profile.create)["$post"],
+  (typeof client.api.authentication.profile.update)["$patch"],
   200
 >;
 
-export const useCreateProfile = () => {
+export const useUpdateProfile = () => {
   const mutation = useMutation<ResponseType, Error, RequestType>({
     mutationFn: async ({ json }) => {
-      const response = await client.api.profile.create["$post"]({ json });
+      const response = await client.api.authentication.profile.update["$patch"](
+        { json }
+      );
 
       if (!response.ok) {
         throw new Error("Something went wrong!");

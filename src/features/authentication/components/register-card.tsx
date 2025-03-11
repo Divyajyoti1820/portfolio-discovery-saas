@@ -35,7 +35,6 @@ import {
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
-import { useCreateProfile } from "@/features/profile/api/use-create-profile";
 
 export const RegisterCard = () => {
   const router = useRouter();
